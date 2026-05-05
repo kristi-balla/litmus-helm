@@ -1,0 +1,32 @@
+{{ if not (has "pod-network-policy" .Values.experiments.disabled) }}
+---
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosExperiment
+metadata:
+  name: pod-network-policy
+  labels:
+    name: pod-network-policy
+    app.kubernetes.io/part-of: litmus
+    app.kubernetes.io/component: chaosexperiment
+    app.kubernetes.io/version: latest
+spec:
+  definition:
+    scope: Namespaced
+    permissions:
+      - apiGroups:
+          - "*"
+        resources:
+          - "*"
+        verbs:
+          - "*"
+    image: "{{ .Values.image.litmusGO.repository }}:{{ .Values.image.litmusGO.tag }}"
+    imagePullPolicy: {{ .Values.image.litmusGO.pullPolicy }}
+    args:
+      - -c
+      - ./experiments -name pod-network-policy
+    command:
+      - /bin/bash
+    labels:
+      name: pod-network-policy
+      app.kubernetes.io/part-of: litmus
+{{ end }}
