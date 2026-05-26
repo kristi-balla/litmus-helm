@@ -1,0 +1,25 @@
+{{ if not (has "log-generator" .Values.experiments.disabled) }}
+---
+apiVersion: litmuschaos.io/v1alpha1
+description:
+  message: |
+    Generates as many logs as you want it to
+kind: ChaosExperiment
+metadata:
+  name: log-generator
+  labels:
+    {{- include "kubernetes-chaos.labels" . | indent 4 }}
+spec:
+  definition:
+    scope: Namespaced
+    image: "{{ .Values.image.litmusGO.repository }}:{{ .Values.image.litmusGO.tag }}"
+    imagePullPolicy: {{ .Values.image.litmusGO.pullPolicy }}
+    args:
+      - -c
+      - ./experiments -name log-generator
+    command:
+    - /bin/bash
+    labels:
+      name: log-generator
+      app.kubernetes.io/part-of: litmus
+{{ end }}
