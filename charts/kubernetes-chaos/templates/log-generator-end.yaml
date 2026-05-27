@@ -1,4 +1,4 @@
-{{ if not (has "log-generator" .Values.experiments.disabled) }}
+{{ if not (has "log-generator-end" .Values.experiments.disabled) }}
 ---
 apiVersion: litmuschaos.io/v1alpha1
 description:
@@ -6,7 +6,7 @@ description:
     Generates as many logs as you want it to
 kind: ChaosExperiment
 metadata:
-  name: log-generator
+  name: log-generator-end
   labels:
     {{- include "kubernetes-chaos.labels" . | indent 4 }}
 spec:
@@ -20,6 +20,6 @@ spec:
     command:
     - /bin/bash
     labels:
-      name: log-generator
+      name: log-generator-end
       app.kubernetes.io/part-of: litmus
 {{ end }}
