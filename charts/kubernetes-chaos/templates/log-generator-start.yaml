@@ -16,7 +16,7 @@ spec:
     imagePullPolicy: {{ .Values.image.litmusGO.pullPolicy }}
     args:
       - -c
-      - ./experiments -name log-generator
+      - ./experiments -name log-generator-start
     command:
     - /bin/bash
     labels:
