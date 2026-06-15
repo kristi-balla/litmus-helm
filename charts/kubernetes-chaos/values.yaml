@@ -32,3 +32,14 @@ environment:
 
 experiments:
   disabled: []
+
+# by default set to cluster, namespace also available
+mode: namespace
+# list of namespaces to grant the SA rights
+ns:
+  - mvnr-mtcil1-appln-amf-amf1
+  - mvnr-mtcil1-appln-nrf-nrf1
+  - mvnr-mtcil1-appln-nssf-nssf1
+  - mvnr-mtcil1-appln-smf-smf11
+  - mvnr-mtcil1-appln-udsf-udsf1
+  - mvnr-mtcil1-appln-upf-upf1
