@@ -8,8 +8,20 @@ metadata:
     app: {{ template "litmus.name" . }}
     {{- include "litmus.labels" . | indent 4 }}
 rules:
-- apiGroups: ["","apps","batch","extensions","litmuschaos.io", "argoproj.io"]
-  resources: ["pods","pods/exec","pods/log","pods/eviction","jobs","deployments","daemonsets","statefulsets","events","configmaps","services","rollouts","chaosengines","chaosexperiments","chaosresults"]
+- apiGroups: [""]
+  resources: ["pods","pods/exec","pods/log","pods/eviction","events","configmaps","services"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["apps"]
+  resources: ["deployments","daemonsets","statefulsets"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["argoproj.io"]
+  resources: ["rollouts"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["litmuschaos.io"]
+  resources: ["chaosengines","chaosexperiments","chaosresults"]
   verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
 - apiGroups: ["litmuschaos.io"]
   resources: ["chaosengines/finalizers"]

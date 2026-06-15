@@ -7,43 +7,24 @@ metadata:
   labels:
     {{- include "kubernetes-chaos.labels" . | indent 4 }}
 rules:
-- apiGroups:
-  - ""
-  - "apps"
-  - "batch"
-  - "extensions"
-  - "apps.openshift.io"
-  - "argoproj.io"
-  - "litmuschaos.io"
-  resources:
-  - "jobs"
-  - "pods"
-  - "pods/exec"
-  - "pods/log"
-  - "pods/eviction"
-  - "daemonsets"
-  - "replicasets"
-  - "deployments"
-  - "statefulsets"
-  - "services"
-  - "events"
-  - "configmaps"
-  - "secrets"
-  - "networkpolicies"
-  - "replicationcontrollers"
-  - "deploymentconfigs"
-  - "rollouts"
-  - "chaosengines"
-  - "chaosexperiments"
-  - "chaosresults"
-  verbs:
-  - "create"
-  - "delete"
-  - "get"
-  - "list"
-  - "patch"
-  - "update"
-  - "deletecollection"
+- apiGroups: [""]
+  resources: ["pods","pods/exec","pods/log","pods/eviction","services","events","configmaps","secrets","replicationcontrollers"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["apps"]
+  resources: ["daemonsets","replicasets","deployments","statefulsets"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["apps.openshift.io"]
+  resources: ["deploymentconfigs"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["argoproj.io"]
+  resources: ["rollouts"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["litmuschaos.io"]
+  resources: ["chaosengines","chaosexperiments","chaosresults"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
 - apiGroups:
   - ""
   resources:
