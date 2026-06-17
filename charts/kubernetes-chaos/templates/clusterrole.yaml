@@ -37,4 +37,7 @@ rules:
 - apiGroups: ["networking.k8s.io"]
   resources: ["networkpolicies"]
   verbs: ["create", "get", "list", "delete"]
+- apiGroups: ["k8s.cni.cncf.io"]
+  resources: ["network-attachment-definition"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
 {{ end }}

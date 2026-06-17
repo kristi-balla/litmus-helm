@@ -29,4 +29,7 @@ rules:
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
   verbs: ["get","create","list","update","delete"]
+- apiGroups: ["k8s.cni.cncf.io"]
+  resources: ["network-attachment-definition"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
 {{ end }}
