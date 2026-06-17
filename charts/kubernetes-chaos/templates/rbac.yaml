@@ -39,7 +39,7 @@ rules:
   resources: ["networkpolicies"]
   verbs: ["create", "get", "list", "delete"]
 - apiGroups: ["k8s.cni.cncf.io"]
-  resources: ["network-attachment-definition"]
+  resources: ["network-attachment-definitions"]
   verbs: ["create","delete","get","list","patch","update","deletecollection"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
