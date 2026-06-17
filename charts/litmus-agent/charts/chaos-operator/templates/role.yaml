@@ -54,4 +54,7 @@ rules:
   - apiGroups: [ "litmuschaos.io" ]
     resources: [ "chaosengines/finalizers" ]
     verbs: [ "update" ]
+  - apiGroups: ["k8s.cni.cncf.io"]
+    resources: ["network-attachment-definition"]
+    verbs: ["create","delete","get","list","patch","update","deletecollection"]
 {{- end }}
