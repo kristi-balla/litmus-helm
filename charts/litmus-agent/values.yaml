@@ -5,9 +5,6 @@ global:
   customLabels: {}
   # INFRA_MODE: cluster, namespace
   INFRA_MODE: "cluster"
-  # Name of the shared litmus-core ServiceAccount that all components use.
-  # Must match the SA created by the litmus-core chart (release-name + "litmus-core", or fullnameOverride).
-  litmusSAName: "litmus"
 # Default values for litmus-agent.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
