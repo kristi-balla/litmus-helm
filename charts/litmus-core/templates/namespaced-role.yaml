@@ -1,0 +1,35 @@
+{{ if eq .Values.operatorMode "namespaced" }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "litmus.fullname" . }}
+  labels:
+    app: {{ template "litmus.name" . }}
+    {{- include "litmus.labels" . | indent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["pods","pods/exec","pods/log","pods/eviction","events","configmaps","services"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["apps"]
+  resources: ["deployments","daemonsets","statefulsets"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["argoproj.io"]
+  resources: ["rollouts"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["litmuschaos.io"]
+  resources: ["chaosengines","chaosexperiments","chaosresults"]
+  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+- apiGroups: ["litmuschaos.io"]
+  resources: ["chaosengines/finalizers"]
+  verbs: ["update"]
+- apiGroups: ["coordination.k8s.io"]
+  resources: ["leases"]
+  verbs: ["get","create","list","update","delete"]
+- apiGroups: ["k8s.cni.cncf.io"]
+  resources: ["network-attachment-definitions"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+{{ end }}

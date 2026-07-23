@@ -1,0 +1,43 @@
+{{ if eq .Values.mode "cluster" }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubernetes-chaos.name" . }}-chaos-admin
+  labels:
+    {{- include "kubernetes-chaos.labels" . | indent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["pods","pods/exec","pods/log","pods/eviction","services","events","configmaps","secrets","replicationcontrollers"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["apps"]
+  resources: ["daemonsets","replicasets","deployments","statefulsets"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["apps.openshift.io"]
+  resources: ["deploymentconfigs"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["argoproj.io"]
+  resources: ["rollouts"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups: ["litmuschaos.io"]
+  resources: ["chaosengines","chaosexperiments","chaosresults"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+- apiGroups:
+  - ""
+  resources:
+  - "nodes"
+  verbs:
+  - "get"
+  - "list"
+  - "patch"
+  - "update"
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
+  verbs: ["create", "get", "list", "delete"]
+- apiGroups: ["k8s.cni.cncf.io"]
+  resources: ["network-attachment-definitions"]
+  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+{{ end }}
