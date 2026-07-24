@@ -9,27 +9,49 @@ metadata:
     {{- include "litmus.labels" . | indent 4 }}
 rules:
 - apiGroups: [""]
-  resources: ["pods","pods/exec","pods/log","pods/eviction","events","configmaps","services"]
-  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+  resources: ["pods"]
+  verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create", "get"]
+
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
+
+- apiGroups: [""]
+  resources: ["pods/eviction"]
+  verbs: ["create"]
+
+# ConfigMaps and Secrets - read access for experiment configuration
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+
+# Events - for experiment visibility
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["create", "get", "list", "watch"]
+
 - apiGroups: ["apps"]
-  resources: ["deployments","daemonsets","statefulsets"]
+  resources: ["deployments","daemonsets","statefulsets","replicasets"]
   verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+
 - apiGroups: ["batch"]
   resources: ["jobs"]
   verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
-- apiGroups: ["argoproj.io"]
-  resources: ["rollouts"]
-  verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+
 - apiGroups: ["litmuschaos.io"]
   resources: ["chaosengines","chaosexperiments","chaosresults"]
   verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+
 - apiGroups: ["litmuschaos.io"]
   resources: ["chaosengines/finalizers"]
   verbs: ["update"]
+
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
   verbs: ["get","create","list","update","delete"]
-- apiGroups: ["k8s.cni.cncf.io"]
-  resources: ["network-attachment-definitions"]
-  verbs: ["create","delete","get","list","patch","update","deletecollection"]
+
 {{ end }}

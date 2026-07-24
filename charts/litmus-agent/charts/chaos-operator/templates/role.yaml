@@ -10,34 +10,23 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 rules:
-  - apiGroups: [""]
-    resources: ["replicationcontrollers", "secrets"]
-    verbs: ["get", "list"]
-  - apiGroups: ["apps.openshift.io"]
-    resources: ["deploymentconfigs"]
-    verbs: ["get", "list"]
+
   - apiGroups: ["apps"]
     resources: ["deployments", "daemonsets", "replicasets", "statefulsets"]
     verbs: ["get", "list"]
+
   - apiGroups: ["batch"]
     resources: ["jobs"]
     verbs: ["get", "list", "deletecollection"]
-  - apiGroups: ["argoproj.io"]
-    resources: ["rollouts"]
-    verbs: ["get", "list"]
+
   - apiGroups: [""]
-    resources: ["pods","pods/exec", "configmaps", "events", "services"]
-    verbs:
-      [
-        "get",
-        "create",
-        "update",
-        "patch",
-        "delete",
-        "list",
-        "watch",
-        "deletecollection",
-      ]
+    resources: ["pods", "events", "services", "configmaps", "replicationcontrollers", "secrets"]
+    verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create", "get"]
+
   - apiGroups: ["litmuschaos.io"]
     resources: ["chaosengines", "chaosexperiments", "chaosresults"]
     verbs:
@@ -51,9 +40,11 @@ rules:
         "watch",
         "deletecollection",
       ]
+
   - apiGroups: [ "litmuschaos.io" ]
     resources: [ "chaosengines/finalizers" ]
     verbs: [ "update" ]
+
   - apiGroups: ["k8s.cni.cncf.io"]
     resources: ["network-attachment-definitions"]
     verbs: ["create","delete","get","list","patch","update","deletecollection"]

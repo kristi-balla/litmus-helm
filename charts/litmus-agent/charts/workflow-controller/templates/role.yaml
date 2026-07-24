@@ -11,35 +11,25 @@ metadata:
   {{- end }}
 rules:
   - apiGroups: [""]
-    resources: ["pods", "pods/exec"]
+    resources: ["pods", "configmaps", "persistentvolumeclaims"]
     verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  
   - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["get", "watch", "list"]
-  - apiGroups: [""]
-    resources: ["persistentvolumeclaims"]
-    verbs: ["create", "delete"]
-  - apiGroups: ["argoproj.io"]
-    resources: ["workflows", "workflows/finalizers"]
-    verbs: ["get", "list", "watch", "update", "patch", "delete", "create"]
-  - apiGroups: ["argoproj.io"]
-    resources: ["workflowtemplates","workflowtemplates/finalizers","workflowtasksets"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [ "argoproj.io" ]
-    resources: [ "workflowtaskresults" ]
-    verbs: [ "list", "watch", "deletecollection" ]
+    resources: ["pods/exec"]
+    verbs: ["create", "get"]
+  
   - apiGroups: [""]
     resources: ["serviceaccounts"]
     verbs: ["get", "list"]
+  
   - apiGroups: [ "" ]
     resources: [ "secrets" ]
     verbs: [ "get" ]
-  - apiGroups: ["argoproj.io"]
-    resources: ["cronworkflows", "cronworkflows/finalizers"]
-    verbs: ["get", "list", "watch", "update", "patch", "delete"]
+  
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["create", "patch"]
+  
   - apiGroups: ["policy"]
     resources: ["poddisruptionbudgets"]
     verbs: ["create", "get", "delete"]
