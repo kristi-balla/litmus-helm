@@ -4,7 +4,7 @@
 
 appSettings:
   configmapName: "workflow-controller-configmap"
-  executorImage: "litmuschaos/argoexec:v3.3.1"
+  executorImage: "harbor.das-schiff.telekom.de/arca-with-llms/argoexec:v1.0.0"
   containerRuntimeExecutor: "k8sapi"
   loglevel: "debug"
   gloglevel: "1"
@@ -15,10 +15,10 @@ crds:
 replicaCount: 1
 
 image:
-  repository: litmuschaos.docker.scarf.sh/litmuschaos/workflow-controller
+  repository: harbor.das-schiff.telekom.de/arca-with-llms/workflow-controller
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v3.3.1"
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""

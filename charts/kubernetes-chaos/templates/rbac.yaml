@@ -1,5 +1,6 @@
 {{- if eq .Values.mode "namespace" }}
 {{- range .Values.ns }}
+{{- if ne . $.Release.Namespace }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -8,6 +9,7 @@ metadata:
   namespace: {{ . }}
   labels:
     {{- include "kubernetes-chaos.labels" $ | indent 4 }}
+{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role

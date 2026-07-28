@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: litmuschaos.docker.scarf.sh/litmuschaos/chaos-exporter
+  repository: harbor.das-schiff.telekom.de/arca-with-llms/chaos-exporter
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: v1.0.0
 
 imagePullSecrets: []
 nameOverride: ""

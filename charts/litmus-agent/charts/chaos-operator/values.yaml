@@ -5,15 +5,15 @@
 replicaCount: 1
 
 image:
-  repository: litmuschaos.docker.scarf.sh/litmuschaos/chaos-operator
+  repository: harbor.das-schiff.telekom.de/arca-with-llms/chaos-operator
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: v1.0.0
 
 runner:
   image:
-    repository: litmuschaos.docker.scarf.sh/litmuschaos/chaos-runner
-    tag: ""
+    repository: harbor.das-schiff.telekom.de/arca-with-llms/chaos-runner
+    tag: v1.0.0
 
 imagePullSecrets: []
 nameOverride: ""
